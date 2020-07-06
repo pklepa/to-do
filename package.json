@@ -1,0 +1,22 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "[Odin] Simple To-Do-List type web based application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pklepa/to-do.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pklepa/to-do/issues"
+  },
+  "homepage": "https://github.com/pklepa/to-do#readme",
+  "dependencies": {
+    "materialize-css": "^1.0.0-rc.2"
+  }
+}

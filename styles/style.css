@@ -1,0 +1,39 @@
+:root {
+    --light: #f3e1e1;
+    --extra-light: #faf2f2;
+    --normal: #f1d1d1;
+    --dark: #7d5a5a;
+
+    --red-accent-2: #ff5252;
+
+}
+
+#pageLayout {
+    margin-top: 40px;
+}
+
+#sideBar {
+    padding: 0 20px;
+    border-right: 10px solid var(--normal);
+}
+
+#sideBar a#btn-newProject {
+    margin: 16px 0;
+}
+
+#sideBar a.secondary-content { color: #e0e0e0; }
+#sideBar a.secondary-content:hover { color: var(--red-accent-2); }
+
+#sideBar ul.collection {
+    border: none;
+}
+
+#sideBar li.collection-header {
+    border: none;
+    padding: 10px 0 ;
+}
+
+#sideBar li.collection-item {
+    padding: 0 0 8px;
+    margin: 8px 20px;
+}
