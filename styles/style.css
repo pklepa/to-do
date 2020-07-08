@@ -17,12 +17,18 @@
     border-right: 10px solid var(--normal);
 }
 
+#sideBar .title {
+    color: var(--red-accent-2);
+}
+
+
 #sideBar a#btn-newProject {
     margin: 16px 0;
 }
 
-#sideBar a.secondary-content { color: #e0e0e0; }
-#sideBar a.secondary-content:hover { color: var(--red-accent-2); }
+a.secondary-content { color: #e0e0e0; }
+a.secondary-content:hover { color: var(--red-accent-2); }
+a.secondary-content + a.secondary-content { margin-right: 10px; }
 
 #sideBar ul.collection {
     border: none;
@@ -36,4 +42,34 @@
 #sideBar li.collection-item {
     padding: 0 0 8px;
     margin: 8px 20px;
+}
+
+
+.collapsible-body .my-body-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collapsible-body .my-body-container .body-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.collapsible-body .my-body-container .body-content span {
+    display: flex;
+    align-items: center;
+}
+
+.collapsible-body .my-body-container .body-content span + span {
+    margin-top: 20px;
+}
+
+
+.collapsible-body .my-body-container .body-content span i {
+    margin-right: 5px;
+    color: var(--red-accent-2);
 }
