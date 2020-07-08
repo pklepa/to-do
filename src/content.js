@@ -94,6 +94,7 @@ function renderContent() {
           <div class="nav-wrapper">
             <div class="col s12">
               <a href="#!" class="breadcrumb">home</a>
+              <a href="#!" class="secondary-content"><i class="material-icons">delete</i></a>
               <a href="#!" class="breadcrumb">#example</a>
             </div>
           </div>
