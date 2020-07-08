@@ -1,39 +1,10 @@
-<!DOCTYPE html>
+function renderContent() {
+  const body = document.querySelector('body');
 
-<html>
-  <head>
-    <title>sh*t-to-do</title>
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  const content = document.createElement('div');
+  content.id = 'content';
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection"/>
-
-    <link rel="stylesheet" href="./styles/style.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
-
-  <body>
-
-    <!-- Navbar -->
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">sh*t-to-do</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Page Layout -->
+  const contentHTML = `
     <div id="pageLayout" class="row">
 
       <!-- Side navigation panel -->
@@ -246,9 +217,10 @@
         </div>
 
       </div>
+  `;
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
-      <script src="./src/index.js"></script>
-    </body>
-  </html>
+  content.insertAdjacentHTML("beforeend", contentHTML)
+  body.appendChild(content);
+}
+
+export { renderContent }

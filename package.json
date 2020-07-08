@@ -2,7 +2,6 @@
   "name": "to-do",
   "version": "1.0.0",
   "description": "[Odin] Simple To-Do-List type web based application",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +17,9 @@
   "homepage": "https://github.com/pklepa/to-do#readme",
   "dependencies": {
     "materialize-css": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
