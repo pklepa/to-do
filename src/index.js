@@ -1,15 +1,66 @@
 import { renderNavbar } from './navbar'
-import { renderContent } from './content';
+import { renderPageLayout } from './pageLayout';
+import { renderSidebar, updateNewProjectModal } from './sidebar';
+import { renderMainContainer } from './mainContainer';
 
+// - Initial page rendering
 renderNavbar();
-renderContent();
+renderPageLayout();
+renderSidebar();
+renderMainContainer();
 
-// - Materialize CSS Components Loaders
+
+
+// - Global variables
+const sidebar = document.querySelector('projects');
+let projectsArr = [];
+let idCounter = 0;
+
+
+
+// - Materialize-CSS Components Loaders
 document.addEventListener('DOMContentLoaded', function () {
-  var elems = document.querySelectorAll('.collapsible');
-  M.Collapsible.init(elems);
+  const collapsibles = document.querySelectorAll('.collapsible');
+  const modals = document.querySelectorAll('.modal');
+  const tooltipped = document.querySelectorAll('.tooltipped');
+  M.Collapsible.init(collapsibles);
+  M.Modal.init(modals);
+  M.Tooltip.init(tooltipped);
 });
-document.addEventListener('DOMContentLoaded', function() {
-  var elems = document.querySelectorAll('.tooltipped');
-  M.Tooltip.init(elems);
+
+
+
+// - Event Listeners on elements
+document.querySelector('#btn-newProjectConfirm').addEventListener('click', () => {
+
+  // Creates a new project with given name and description
+  const name = document.querySelector('input#project_name').value;
+  const description = document.querySelector('input#project_description').value;
+
+  let newProject = Project(name, description);
+  projectsArr.push(newProject);
+
+
+  // Renders project page
+
+
+  // Resets all inputs inside the modal in value and in visual effects
+  updateNewProjectModal();
+
 });
+
+
+
+// - Factory Functions
+const Project = (projName, projDescription) => {
+  let name = projName;
+  let description = projDescription || 'hello';
+  let id = ++idCounter;
+  let tasks = {};
+
+  const makeProject = () => {
+    
+  }
+
+  return { name, description, tasks, id }
+}

@@ -1,8 +1,5 @@
 function renderMainContainer() {
-  const pageLayout = document.querySelector('#pageLayout');
-
-  const main = document.createElement('div');
-  main.classList.add('col', 's8');
+  const main = document.querySelector('#mainContainer');
 
   const mainHTML = `
     <!-- Breadcrumb -->
@@ -25,24 +22,16 @@ function renderMainContainer() {
 
     <ul style="max-width: 800px;" class="collection with-header">
       <li class="collection-header"><h4>your projects</h4></li>
-      <a href="#!" class="collection-item">#example</a>
-      <a href="#!" class="collection-item">#project-a</a>          
-      <a href="#!" class="collection-item">#project-a</a>          
-      <a href="#!" class="collection-item">#project-a</a>          
-      <a href="#!" class="collection-item">#project-a</a>          
-      <a href="#!" class="collection-item">#project-a</a>          
-      <a href="#!" class="collection-item">#project-a</a>          
+      <a href="#!" class="collection-item">#example</a>           
     </ul>
 
-    <a id="btn-newProject" class="waves-effect waves-light btn-small red accent-2">
+    <a id="btn-newProject" class="waves-effect waves-light btn-small red accent-2 modal-trigger" href="#modal1">
       <i class="material-icons left">add</i>New project
-    </a>  
+    </a>
   `;
 
-  main.insertAdjacentHTML("beforeend", mainHTML)
-  pageLayout.appendChild(main);
-
-
+  main.insertAdjacentHTML("beforeend", mainHTML);
 }
+
 
 export { renderMainContainer }

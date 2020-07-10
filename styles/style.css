@@ -12,17 +12,17 @@
     margin-top: 40px;
 }
 
-#sideBar {
+#sideContainer {
     padding: 0 20px;
     border-right: 10px solid var(--normal);
 }
 
-#sideBar .title {
+#sideContainer .title {
     color: var(--red-accent-2);
 }
 
 
-#sideBar a#btn-newProject {
+#sideContainer a#btn-newProject {
     margin: 16px 0;
 }
 
@@ -30,18 +30,23 @@ a.secondary-content { color: #e0e0e0; }
 a.secondary-content:hover { color: var(--red-accent-2); }
 a.secondary-content + a.secondary-content { margin-right: 10px; }
 
-#sideBar ul.collection {
+#sideContainer ul.collection {
     border: none;
 }
 
-#sideBar li.collection-header {
+#sideContainer li.collection-header {
     border: none;
     padding: 10px 0 ;
 }
 
-#sideBar li.collection-item {
+#sideContainer li.collection-item {
     padding: 0 0 8px;
     margin: 8px 20px;
+}
+
+#sideContainer li.collection-item .view-more {
+    color: var(--red-accent-2);
+    font-size: 12px;
 }
 
 
