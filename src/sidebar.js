@@ -85,26 +85,6 @@ function renderSidebar() {
         <i class="material-icons left">add</i>New project
       </a>
 
-      <!-- Modal Structure -->
-      <div id="modal1" class="modal modal-fixed-footer" style="max-height: 300px;">
-        <div class="modal-content">
-          <h4>Create new project</h4>
-          <p>Give your project a name and a brief description.</p>
-          <div class="input-field col s4">
-            <input id="project_name" type="text" class="validate">
-            <label for="project_name">Project name</label>
-          </div>
-          <div class="input-field col s8">
-            <input id="project_description" type="text" class="validate">
-            <label for="project_description">Description</label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-close waves-effect waves-red btn-flat">Cancel</a>
-          <a id="btn-newProjectConfirm" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
-        </div>
-      </div>
-
     </div>
   `;
 
