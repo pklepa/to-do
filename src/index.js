@@ -9,7 +9,8 @@ renderNavbar();
 renderPageLayout();
 renderSidebar();
 // renderHome();
-renderProject();
+
+
 
 
 
@@ -64,10 +65,12 @@ document.querySelector('#btn-newProjectConfirm').addEventListener('click', () =>
   const name = document.querySelector('input#project_name').value;
   const description = document.querySelector('input#project_description').value;
 
-  ProjectController.add(Project(name, description));
+  let newProject = Project(name, description);
+  ProjectManager.add(newProject);
 
 
   // Renders project page
+  renderProject(newProject);
 });
 
 
@@ -81,10 +84,10 @@ document.querySelector('#btn-newTaskConfirm').addEventListener('click', () => {
   // const prio = document.querySelector('input#task_name').value;
 
   let newTask = Task({name, description, dueDate});
-  ProjectController.getCurrent().addTask(newTask);
+  ProjectManager.getCurrent().addTask(newTask);
 
-  console.log(ProjectController.getAll());
-  console.log(ProjectController.getCurrent().getAllTasks());
+  console.log(ProjectManager.getAll());
+  console.log(ProjectManager.getCurrent().getAllTasks());
 
 });
 
@@ -107,15 +110,16 @@ const Task = (arg) => {
   let task = {
     name: arg.name,
     description: arg.description,
-    dueDate: arg.dueDate,
-    prio: arg.prio,
+    dueDate: arg.dueDate || 'Not set',
+    prio: arg.prio || 0,
+    done: arg.done || false,
   };
 
   return { task }
 }
 
 
-const ProjectController = (() => {
+const ProjectManager = (() => {
   let projectsArr = [];
   let idCounter = 0;
   let currentProject;
@@ -132,6 +136,45 @@ const ProjectController = (() => {
 
   return { add, getCurrent, getAll }
 })();
+
+
+
+
+
+// - Example Project
+let example = Project('example', 'here\'s a brief description of what the project is about');
+example.addTask({
+  name: 'urgent task',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  dueDate: '06 / Jul / 20',
+  prio: 1,
+  done: true,
+});
+
+example.addTask({
+  name: 'high priority task',
+  description: 'Duis sodales est nec hendrerit ultricies.',
+  dueDate: '25 / Jul / 20',
+  prio: 2,
+});
+
+example.addTask({
+  name: 'medium priority task',
+  description: 'Morbi rhoncus erat tellus, ut vehicula erat pretium vel.',
+  dueDate: '04 / Aug / 20',
+  prio: 3,
+});
+
+example.addTask({
+  name: 'low priority task',
+  description: 'Vivamus eu ante nec massa dictum blandit id ut mauris.',
+  dueDate: '12 / Dec / 20',
+  prio: 4,
+});
+
+ProjectManager.add(example);
+renderProject(example);
+
 
 
 /*

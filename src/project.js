@@ -11,124 +11,17 @@ function renderProject(project) {
         <div class="col s12">
           <a href="#!" class="breadcrumb">home</a>
           <a href="#!" class="secondary-content tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
-          <a href="#!" class="breadcrumb">#example</a>
+          <a href="#!" class="breadcrumb">#${ project.name }</a>
         </div>
       </div>
     </nav>
 
     <!-- Checkboxes -->
     <blockquote>
-      here's a brief description of what the project is about
+      ${ project.description }
     </blockquote>
 
     <ul class="collapsible">
-      <li class="active">
-        <div class="collapsible-header">
-          <label>
-            <input type="checkbox" checked="checked"/>
-            <span>urgent task</span>
-          </label>
-          <span class="new badge red" data-badge-caption="urgent"></span>
-        </div>
-        <div class="collapsible-body">
-          <div class="my-body-container">
-            <div class="body-content">
-              <span><i class="material-icons">info</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-              <span name="due-date"><i class="material-icons">date_range</i>06 / Jul / 20</span>
-            </div>
-
-            <div class="icons">
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">delete</i>
-              </a>
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">edit</i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="collapsible-header">
-          <label>
-            <input type="checkbox"/>
-            <span>high priority task</span>
-          </label>
-          <span class="new badge orange darken-2" data-badge-caption="high prio"></span>
-        </div>
-        <div class="collapsible-body">
-          <div class="my-body-container">
-            <div class="body-content">
-              <span><i class="material-icons">info</i>Duis sodales est nec hendrerit ultricies.</span>
-              <span name="due-date"><i class="material-icons">date_range</i>25 / Jul / 20</span>
-            </div>
-
-            <div class="icons">
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">delete</i>
-              </a>
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">edit</i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="collapsible-header">
-          <label>
-            <input type="checkbox"/>
-            <span>medium priority task</span>
-          </label>
-          <span class="new badge amber" data-badge-caption="medium prio"></span>
-        </div>
-        <div class="collapsible-body">
-          <div class="my-body-container">
-            <div class="body-content">
-              <span><i class="material-icons">info</i>Morbi rhoncus erat tellus, ut vehicula erat pretium vel.</span>
-              <span name="due-date"><i class="material-icons">date_range</i>04 / Aug / 20</span>
-            </div>
-
-            <div class="icons">
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">delete</i>
-              </a>
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">edit</i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="collapsible-header">
-          <label>
-            <input type="checkbox"/>
-            <span>low priority task</span>
-          </label>
-          <span class="new badge lime darken-2" data-badge-caption="low prio"></span>
-        </div>
-        <div class="collapsible-body">
-          <div class="my-body-container">
-            <div class="body-content">
-              <span><i class="material-icons">info</i>Vivamus eu ante nec massa dictum blandit id ut mauris.</span>
-              <span name="due-date"><i class="material-icons">date_range</i>12 / Dec / 20</span>
-            </div>
-
-            <div class="icons">
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">delete</i>
-              </a>
-              <a href="#!" class="secondary-content">
-                <i class="material-icons">edit</i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
     </ul>
 
     <div class="center-align">
@@ -141,6 +34,67 @@ function renderProject(project) {
 
   content.insertAdjacentHTML("beforeend", contentHTML);
   main.appendChild(content);
+
+
+  const taskList = document.querySelector('.mainContent ul.collapsible');
+  project.getAllTasks().forEach(task => {
+    let isTaskDone = task.done ? 'checked="checked"' : '';
+
+    // If task priority is not set, don't add a badge. If it is, decide what color and what text.
+    let badge;
+    switch (task.prio) {
+      case 1:
+        badge = `<span class="new badge red" data-badge-caption="urgent"></span>`;
+        break;
+      case 2:
+        badge = `<span class="new badge orange darken-2" data-badge-caption="high prio"></span>`;
+        break;
+      case 3:
+        badge = `<span class="new badge amber" data-badge-caption="medium prio"></span>`;
+        break;
+      case 4:
+        badge = `<span class="new badge lime darken-2" data-badge-caption="low prio"></span>`;
+        break;
+        
+      default:
+        badge = ``;  
+    }
+
+    let taskHTML = `
+      <li>
+        <div class="collapsible-header">
+          <label>
+            <input type="checkbox" ${ isTaskDone }/>
+            <span>${ task.name }</span>
+          </label>
+          ${ badge }
+        </div>
+        <div class="collapsible-body">
+          <div class="my-body-container">
+            <div class="body-content">
+              <span><i class="material-icons">info</i>${ task.description }</span>
+              <span name="due-date"><i class="material-icons">date_range</i> ${ task.dueDate }</span>
+            </div>
+
+            <div class="icons">
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">delete</i>
+              </a>
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">edit</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    `;
+
+    taskList.insertAdjacentHTML("beforeend", taskHTML);
+  });
+
+
+
+  
 }
 
 
