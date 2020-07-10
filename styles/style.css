@@ -78,3 +78,13 @@ a.secondary-content + a.secondary-content { margin-right: 10px; }
     margin-right: 5px;
     color: var(--red-accent-2);
 }
+
+.modal.datepicker-modal {
+    min-width: 580px;
+    min-height: 380px;
+    z-index: 3000;
+}
+
+.modal.datepicker-modal .modal-content.datepicker-container {
+    height: 100%;
+}

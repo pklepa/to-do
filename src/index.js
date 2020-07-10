@@ -1,13 +1,15 @@
 import { renderNavbar } from './navbar'
 import { renderPageLayout } from './pageLayout';
-import { renderSidebar, updateNewProjectModal } from './sidebar';
-import { renderMainContainer } from './mainContainer';
+import { renderSidebar } from './sidebar';
+import { renderHome } from './home';
+import { renderProject } from './project';
 
 // - Initial page rendering
 renderNavbar();
 renderPageLayout();
 renderSidebar();
-renderMainContainer();
+// renderHome();
+renderProject();
 
 
 
@@ -23,9 +25,34 @@ document.addEventListener('DOMContentLoaded', function () {
   const collapsibles = document.querySelectorAll('.collapsible');
   const modals = document.querySelectorAll('.modal');
   const tooltipped = document.querySelectorAll('.tooltipped');
+  const datepickers = document.querySelectorAll('.datepicker');
+  const selects = document.querySelectorAll('select');
+
   M.Collapsible.init(collapsibles);
-  M.Modal.init(modals);
+  M.Modal.init(modals, { 
+    onCloseEnd: () => {
+      // Resets all inputs inside the modal in value and in visual effects
+      const inputs = document.querySelectorAll('.modal-content .input-field');
+
+      inputs.forEach(input => {
+        for (let i = 0; i < input.children.length; i++) {
+          let elem = input.children[i];
+
+          if (elem.tagName == 'INPUT') {
+            elem.value = '';
+            elem.classList.remove('valid');
+          } 
+          else if(elem.tagName == 'LABEL') {
+            elem.classList.remove('active');
+          }
+        }
+
+      });
+    }
+  });
   M.Tooltip.init(tooltipped);
+  M.Datepicker.init(datepickers);
+  M.FormSelect.init(selects);
 });
 
 
@@ -42,10 +69,6 @@ document.querySelector('#btn-newProjectConfirm').addEventListener('click', () =>
 
 
   // Renders project page
-
-
-  // Resets all inputs inside the modal in value and in visual effects
-  updateNewProjectModal();
 
 });
 

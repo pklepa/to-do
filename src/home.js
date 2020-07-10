@@ -1,7 +1,10 @@
-function renderMainContainer() {
+function renderHome() {
   const main = document.querySelector('#mainContainer');
 
-  const mainHTML = `
+  const content = document.createElement('div');
+  content.classList.add('mainContent');
+
+  const contentHTML = `
     <!-- Breadcrumb -->
     <nav>
       <div class="nav-wrapper">
@@ -30,8 +33,9 @@ function renderMainContainer() {
     </a>
   `;
 
-  main.insertAdjacentHTML("beforeend", mainHTML);
+  content.insertAdjacentHTML("beforeend", contentHTML);
+  main.appendChild(content);
 }
 
 
-export { renderMainContainer }
+export { renderHome }

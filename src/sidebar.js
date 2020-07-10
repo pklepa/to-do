@@ -112,16 +112,5 @@ function renderSidebar() {
 }
 
 
-function updateNewProjectModal() {
-  // Resets all inputs inside the modal in value and in visual effects
-  const inputs = document.querySelectorAll('.modal-content .input-field');
-  inputs.forEach(input => {
-    input.children[0].value = '';
-    input.children[0].classList.remove('valid');
 
-    input.children[1].classList.remove('active');
-  });
-}
-
-
-export { renderSidebar, updateNewProjectModal }
+export { renderSidebar }
