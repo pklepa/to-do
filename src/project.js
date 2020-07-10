@@ -137,23 +137,17 @@ function renderProject(project) {
 
 
     <!-- Modal Structure -->
-    <div id="modal2" class="modal modal-fixed-footer" style="max-height: 480px;" >
+    <div id="modal2" class="modal modal-fixed-footer" style="max-height: 400px;" >
       <div class="modal-content">
         <h4>New task</h4>
         <div class="row">
           <div class="input-field col s8">
+            <i class="material-icons prefix">check_circle</i>
             <input id="task_name" type="text" class="validate">
             <label for="task_name">Task name</label>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="task_dueDate" type="text" class="datepicker">
-            <label for="task_dueDate">Due Date</label>
-          </div> 
           
-          <div class="input-field col s6">
+          <div class="input-field col s4">
             <select>
               <option value="" disabled selected>Choose your option</option>
               <option value="1">Urgent</option>
@@ -162,18 +156,24 @@ function renderProject(project) {
               <option value="4">Low Priority</option>
             </select>
             <label>Priority Level</label>
-          </div>
+          </div> 
         </div>
-
 
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s8">
+            <i class="material-icons prefix">info</i>
             <input id="task_description" type="text" class="validate">
             <label for="task_description">Description</label>
-          </div>        
+          </div>   
+          
+          <div class="input-field col s4">
+            <i class="material-icons prefix">date_range</i>
+            <input id="task_dueDate" type="text" class="datepicker">
+            <label for="task_dueDate">Due Date</label>
+          </div>
         </div>
-        
       </div>
+
       <div class="modal-footer">
         <a class="modal-close waves-effect waves-red btn-flat">Cancel</a>
         <a id="btn-newProjectConfirm" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
