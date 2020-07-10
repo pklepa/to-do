@@ -2,7 +2,7 @@ import { renderNavbar } from './navbar'
 import { renderPageLayout } from './pageLayout';
 import { renderSidebar } from './sidebar';
 import { renderHome } from './home';
-import { renderProject } from './project';
+import { renderProject, renderTask } from './project';
 
 // - Initial page rendering
 renderNavbar();
@@ -81,14 +81,14 @@ document.querySelector('#btn-newTaskConfirm').addEventListener('click', () => {
   const name = document.querySelector('input#task_name').value;
   const description = document.querySelector('input#task_description').value;
   const dueDate = document.querySelector('input#task_dueDate').value;
-  // const prio = document.querySelector('input#task_name').value;
+  const prio = document.querySelector('select#task_priority').M_FormSelect.input.value;
 
-  let newTask = Task({name, description, dueDate});
+
+  let newTask = Task({name, description, dueDate, prio});
   ProjectManager.getCurrent().addTask(newTask);
 
-  console.log(ProjectManager.getAll());
-  console.log(ProjectManager.getCurrent().getAllTasks());
-
+  // Renders task
+  renderTask(newTask);
 });
 
 
@@ -109,13 +109,13 @@ const Project = (projName, projDescription) => {
 const Task = (arg) => {
   let task = {
     name: arg.name,
-    description: arg.description,
+    description: arg.description || 'No description provided',
     dueDate: arg.dueDate || 'Not set',
     prio: arg.prio || 0,
     done: arg.done || false,
   };
 
-  return { task }
+  return task
 }
 
 
@@ -147,7 +147,7 @@ example.addTask({
   name: 'urgent task',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   dueDate: '06 / Jul / 20',
-  prio: 1,
+  prio: 'Urgent',
   done: true,
 });
 
@@ -155,21 +155,21 @@ example.addTask({
   name: 'high priority task',
   description: 'Duis sodales est nec hendrerit ultricies.',
   dueDate: '25 / Jul / 20',
-  prio: 2,
+  prio: 'High Priority',
 });
 
 example.addTask({
   name: 'medium priority task',
   description: 'Morbi rhoncus erat tellus, ut vehicula erat pretium vel.',
   dueDate: '04 / Aug / 20',
-  prio: 3,
+  prio: 'Medium Priority',
 });
 
 example.addTask({
   name: 'low priority task',
   description: 'Vivamus eu ante nec massa dictum blandit id ut mauris.',
   dueDate: '12 / Dec / 20',
-  prio: 4,
+  prio: 'Low Priority',
 });
 
 ProjectManager.add(example);

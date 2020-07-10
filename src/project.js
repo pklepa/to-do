@@ -1,5 +1,6 @@
 function renderProject(project) {
   const main = document.querySelector('#mainContainer');
+  clearMainContainer();
 
   const content = document.createElement('div');
   content.classList.add('mainContent');
@@ -36,23 +37,37 @@ function renderProject(project) {
   main.appendChild(content);
 
 
-  const taskList = document.querySelector('.mainContent ul.collapsible');
-  project.getAllTasks().forEach(task => {
+  project.getAllTasks().forEach( task => {
+    renderTask(task);
+  });
+  
+}
+
+function clearMainContainer() {
+  const main = document.querySelector('#mainContainer');
+  const content = document.querySelector('.mainContent');
+
+  if(content) { main.removeChild(content) }
+}
+
+function renderTask(task){
+    const taskList = document.querySelector('.mainContent ul.collapsible');
+
     let isTaskDone = task.done ? 'checked="checked"' : '';
 
     // If task priority is not set, don't add a badge. If it is, decide what color and what text.
     let badge;
     switch (task.prio) {
-      case 1:
+      case 'Urgent':
         badge = `<span class="new badge red" data-badge-caption="urgent"></span>`;
         break;
-      case 2:
+      case 'High Priority':
         badge = `<span class="new badge orange darken-2" data-badge-caption="high prio"></span>`;
         break;
-      case 3:
+      case 'Medium Priority':
         badge = `<span class="new badge amber" data-badge-caption="medium prio"></span>`;
         break;
-      case 4:
+      case 'Low Priority':
         badge = `<span class="new badge lime darken-2" data-badge-caption="low prio"></span>`;
         break;
         
@@ -89,13 +104,9 @@ function renderProject(project) {
       </li>
     `;
 
+
     taskList.insertAdjacentHTML("beforeend", taskHTML);
-  });
-
-
-
-  
 }
 
 
-export { renderProject }
+export { renderProject, renderTask }

@@ -63,8 +63,8 @@ function loadNewTaskModal() {
           </div>
           
           <div class="input-field col s4">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
+            <select id="task_priority">
+              <option value="" disabled selected>Not set</option>
               <option value="1">Urgent</option>
               <option value="2">High Priority</option>
               <option value="3">Medium Priority</option>
