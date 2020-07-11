@@ -13,12 +13,6 @@ renderSidebar();
 
 
 
-
-// - Global variables
-
-
-
-
 // - Materialize-CSS Components Loaders
 document.addEventListener('DOMContentLoaded', function () {
   const collapsibles = document.querySelectorAll('.collapsible');

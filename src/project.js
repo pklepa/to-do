@@ -1,6 +1,9 @@
+import { renderHome } from "./home";
+
+
 function renderProject(project) {
   const main = document.querySelector('#mainContainer');
-  clearMainContainer();
+  if(main.children.length > 0){ main.textContent = ""; }
 
   const content = document.createElement('div');
   content.classList.add('mainContent');
@@ -10,7 +13,7 @@ function renderProject(project) {
     <nav>
       <div class="nav-wrapper">
         <div class="col s12">
-          <a href="#!" class="breadcrumb">home</a>
+          <a href="#!" class="breadcrumb btn-goHome">home</a>
           <a href="#!" class="secondary-content tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
           <a href="#!" class="breadcrumb">#${ project.name }</a>
         </div>
@@ -27,27 +30,24 @@ function renderProject(project) {
 
     <div class="center-align">
       <a class="waves-effect waves-light btn-large red accent-2 modal-trigger" href="#modal2"><i class="material-icons left">add</i>Add Task</a>
-    </div>
-
-
-    
+    </div>    
   `;
 
+  // Inserts the content template in the document
   content.insertAdjacentHTML("beforeend", contentHTML);
   main.appendChild(content);
 
 
+  // Adds evenListeners to the newly added anchor tags
+  const homeBtn = document.querySelector('.breadcrumb.btn-goHome');
+  homeBtn.addEventListener('click', renderHome);
+
+
+  // Renders all existent tasks in the current project
   project.getAllTasks().forEach( task => {
     renderTask(task);
   });
   
-}
-
-function clearMainContainer() {
-  const main = document.querySelector('#mainContainer');
-  const content = document.querySelector('.mainContent');
-
-  if(content) { main.removeChild(content) }
 }
 
 function renderTask(task){

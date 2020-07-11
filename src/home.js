@@ -1,5 +1,6 @@
 function renderHome() {
   const main = document.querySelector('#mainContainer');
+  if(main.children.length > 0){ main.textContent = ""; }
 
   const content = document.createElement('div');
   content.classList.add('mainContent');
@@ -33,6 +34,7 @@ function renderHome() {
     </a>
   `;
 
+  // Inserts the content template in the document
   content.insertAdjacentHTML("beforeend", contentHTML);
   main.appendChild(content);
 }
