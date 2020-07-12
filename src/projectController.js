@@ -5,6 +5,8 @@ const Project = (projName, projDescription) => {
   let tasks = [];
   let id;
 
+  let taskIdCounter;
+
   function addTask(task){ tasks.push(task) }
   function getAllTasks(){ return tasks }
 
@@ -26,11 +28,11 @@ const Task = (arg) => {
 
 const ProjectController = (() => {
   let projectsArr = [];
-  let idCounter = 0;
+  let projIdCounter = 0;
   let currentProject;
 
   function add(project){
-    project.id = ++idCounter;
+    project.id = ++projIdCounter;
     projectsArr.push(project);
     
     currentProject = project;

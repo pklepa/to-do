@@ -1,6 +1,13 @@
 import { ProjectController } from "./projectController";
 import { renderProject } from "./project";
 
+function updateSidebar() {
+  const sidebar = document.querySelector('#sideContainer');
+  sidebar.innerHTML = '';
+
+  renderSidebar();
+}
+
 function renderSidebar() {
   const sidebar = document.querySelector('#sideContainer');
 
@@ -93,7 +100,6 @@ function insertProjectsInSideBar(){
     sidebarProjects.appendChild(projectDiv);
     
   });
-
 }
 
-export { renderSidebar }
+export { renderSidebar, updateSidebar }

@@ -1,5 +1,6 @@
 import { ProjectController, Project, Task } from './projectController';
 import { renderProject, renderTask } from './project';
+import { updateSidebar } from './sidebar';
 
 
 
@@ -81,6 +82,9 @@ function loadNewProjectModal() {
   
     // Renders project page
     renderProject(newProject);
+
+    // Updates sidebar
+    updateSidebar();
   });
 }
 
@@ -140,7 +144,6 @@ function loadNewTaskModal() {
 
   // Event Listener
   document.querySelector('#btn-newTaskConfirm').addEventListener('click', () => {
-
     // Creates new task in current project
     const name = document.querySelector('input#task_name').value;
     const description = document.querySelector('input#task_description').value;
@@ -153,6 +156,9 @@ function loadNewTaskModal() {
 
     // Renders task
     renderTask(newTask);
+
+    // Updates sidebar
+    updateSidebar();
   });
 }
 
