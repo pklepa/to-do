@@ -1,3 +1,6 @@
+import { ProjectController } from "./projectController";
+import { renderProject } from "./project";
+
 function renderHome() {
   const main = document.querySelector('#mainContainer');
   if(main.children.length > 0){ main.textContent = ""; }
@@ -20,11 +23,10 @@ function renderHome() {
 
       <h4>welcome!</h4>
       <p>This app in intended to help you get your shit together and do it.</p>
-      <p>Try adding some projects and split your large shit (projects) into smaller, managable, little shitties (or tasks).</p>
+      <p>Try adding some projects and split your large shit (known as projects) into smaller, managable, little shitties (or tasks).</p>
 
       <ul style="max-width: 800px;" class="collection with-header">
         <li class="collection-header"><h4>your projects</h4></li>
-        <a href="#!" class="collection-item">#example</a>           
       </ul>
 
       <a id="btn-newProject" class="waves-effect waves-light btn-small red accent-2 modal-trigger" href="#modal1">
@@ -35,6 +37,31 @@ function renderHome() {
 
   // Inserts the content template in the document
   main.insertAdjacentHTML("beforeend", contentHTML);
+
+  insertProjectsInHomePage();
 }
+
+function insertProjectsInHomePage() {
+  const collection = document.querySelector('.mainContent ul.collection');
+
+  const projects = ProjectController.getAll();
+  projects.forEach(proj => {
+    let projectAnchor = document.createElement('a');
+    projectAnchor.classList.add('collection-item');
+    projectAnchor.href = "#";
+    projectAnchor.textContent = `#${ proj.name }`;
+    projectAnchor.addEventListener('click', () => {
+      ProjectController.setCurrent(proj); 
+      renderProject();
+    });
+
+    collection.appendChild(projectAnchor);
+
+    // let projHTML = `<a href="#" class="collection-item">#${ proj.name }</a>`;
+    // collection.insertAdjacentHTML('beforeend', projHTML);
+  })
+}
+
+
 
 export { renderHome }

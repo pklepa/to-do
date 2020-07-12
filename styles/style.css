@@ -28,6 +28,7 @@
 
 a.secondary-content { color: #e0e0e0; }
 a.secondary-content:hover { color: var(--red-accent-2); }
+a.secondary-content-breadcrumb:hover { color: white; }
 a.secondary-content + a.secondary-content { margin-right: 10px; }
 
 #sideContainer ul.collection {

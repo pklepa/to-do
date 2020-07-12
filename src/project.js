@@ -1,7 +1,10 @@
 import { renderHome } from "./home";
+import { ProjectController } from "./projectController";
 
 
-function renderProject(project) {
+function renderProject() {
+  const project = ProjectController.getCurrent();
+
   const main = document.querySelector('#mainContainer');
   if(main.children.length > 0){ main.textContent = ""; }
 
@@ -14,7 +17,7 @@ function renderProject(project) {
       <div class="nav-wrapper">
         <div class="col s12">
           <a href="#!" class="breadcrumb btn-goHome">home</a>
-          <a href="#!" class="secondary-content tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
+          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
           <a href="#!" class="breadcrumb">#${ project.name }</a>
         </div>
       </div>

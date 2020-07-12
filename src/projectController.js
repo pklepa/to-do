@@ -36,10 +36,11 @@ const ProjectController = (() => {
     currentProject = project;
   }
 
+  function setCurrent(proj){ currentProject = proj; }
   function getCurrent(){ return currentProject }
   function getAll(){ return projectsArr }
 
-  return { add, getCurrent, getAll }
+  return { add, setCurrent, getCurrent, getAll }
 })();
 
 

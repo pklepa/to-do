@@ -3,9 +3,6 @@ import { renderProject } from './project';
 import { DisplayController } from './displayController';
 import { ProjectController, Project } from './projectController';
 
-// - Initial page rendering
-DisplayController.render();
-
 
 // - Example Project
 let example = Project('example', 'here\'s a brief description of what the project is about');
@@ -39,7 +36,12 @@ example.addTask({
 });
 
 ProjectController.add(example);
-renderProject(example);
+
+ProjectController.add(Project('hello','nothing here to see'));
+
+
+// - Initial page rendering
+DisplayController.render();
 
 
 
