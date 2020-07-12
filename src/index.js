@@ -37,7 +37,6 @@ example.addTask({
 
 ProjectController.add(example);
 
-ProjectController.add(Project('hello','nothing here to see'));
 
 
 // - Initial page rendering
@@ -65,11 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   TO-DO:
 
-  - Dynamic rendering of sidebar
+  - Add project to sidebar when created
   - Project edit/delete
   - Completed tasks: syncronize project and sidebar
   - Completed tasks: stylize text (color or riscado)
   - Navigation to and from different projects via anchor tags in sidebar and homepage
+  - Fix mobile view (remove sidebar, add hamburguer menu on navbar?)
 
 
   Extras:

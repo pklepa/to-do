@@ -56,9 +56,6 @@ function insertProjectsInHomePage() {
     });
 
     collection.appendChild(projectAnchor);
-
-    // let projHTML = `<a href="#" class="collection-item">#${ proj.name }</a>`;
-    // collection.insertAdjacentHTML('beforeend', projHTML);
   })
 }
 

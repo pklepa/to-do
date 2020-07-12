@@ -18,6 +18,7 @@ function renderProject() {
         <div class="col s12">
           <a href="#!" class="breadcrumb btn-goHome">home</a>
           <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
+          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">edit</i></a>
           <a href="#!" class="breadcrumb">#${ project.name }</a>
         </div>
       </div>
