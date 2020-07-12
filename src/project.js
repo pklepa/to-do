@@ -47,6 +47,11 @@ function renderProject(project) {
   project.getAllTasks().forEach( task => {
     renderTask(task);
   });
+
+
+  // - Materialize-CSS Components Loaders
+  const collapsibles = document.querySelectorAll('.collapsible');
+  M.Collapsible.init(collapsibles);
   
 }
 

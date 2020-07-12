@@ -1,26 +1,46 @@
-function renderPageLayout() {
-  const body = document.querySelector('body');
+import { ProjectController, Project, Task } from './projectController';
+import { renderProject, renderTask } from './project';
 
-  const pageLayout = document.createElement('div');
-  pageLayout.classList.add('row');
-  pageLayout.id = 'pageLayout';
 
-  const main = document.createElement('div');
-  main.classList.add('col', 's8');
-  main.id = 'mainContainer';
 
-  const sidebar = document.createElement('div');
-  sidebar.classList.add('col', 's4');
-  sidebar.id = 'sideContainer';
+function loadModals() {
+  loadNewProjectModal();
+  loadNewTaskModal();
 
-  pageLayout.appendChild(sidebar);
-  pageLayout.appendChild(main);
-  body.appendChild(pageLayout);
-  body.insertAdjacentHTML('beforeend', loadNewProjectModal() );
-  body.insertAdjacentHTML('beforeend', loadNewTaskModal() );
+
+  // - Materialize-CSS Components Loaders
+  const modals = document.querySelectorAll('.modal');
+  const datepickers = document.querySelectorAll('.datepicker');
+  const selects = document.querySelectorAll('select');
+  
+  M.Datepicker.init(datepickers);
+  M.FormSelect.init(selects);
+  M.Modal.init(modals, { 
+    onCloseEnd: () => {
+      // Resets all inputs inside the modal in value and in visual effects
+      const inputs = document.querySelectorAll('.modal-content .input-field');
+
+      inputs.forEach(input => {
+        for (let i = 0; i < input.children.length; i++) {
+          let elem = input.children[i];
+
+          if (elem.tagName == 'INPUT') {
+            elem.value = '';
+            elem.classList.remove('valid');
+          } 
+          else if(elem.tagName == 'LABEL') {
+            elem.classList.remove('active');
+          }
+        }
+
+      });
+    }
+  });
 }
 
 function loadNewProjectModal() {
+  const todoApp = document.querySelector('#todoApp');
+
   const modalHTML = `
       <!-- Modal Structure -->
       <div id="modal1" class="modal modal-fixed-footer" style="max-height: 300px;">
@@ -46,10 +66,29 @@ function loadNewProjectModal() {
       </div>  
   `;
 
-  return modalHTML;
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
+
+
+  // Event Listener
+  document.querySelector('#btn-newProjectConfirm').addEventListener('click', () => {
+    // Creates a new project with given name and description
+    const name = document.querySelector('input#project_name').value;
+    const description = document.querySelector('input#project_description').value;
+  
+    let newProject = Project(name, description);
+    ProjectController.add(newProject);
+  
+  
+    // Renders project page
+    renderProject(newProject);
+  });
 }
 
+
 function loadNewTaskModal() {
+  const todoApp = document.querySelector('#todoApp');
+
+
   const modalHTML = `
     <!-- Modal Structure -->
     <div id="modal2" class="modal modal-fixed-footer" style="max-height: 400px;" >
@@ -96,8 +135,25 @@ function loadNewTaskModal() {
     </div>
   `;
 
-  return modalHTML
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
 
+
+  // Event Listener
+  document.querySelector('#btn-newTaskConfirm').addEventListener('click', () => {
+
+    // Creates new task in current project
+    const name = document.querySelector('input#task_name').value;
+    const description = document.querySelector('input#task_description').value;
+    const dueDate = document.querySelector('input#task_dueDate').value;
+    const prio = document.querySelector('select#task_priority').M_FormSelect.input.value;
+
+
+    let newTask = Task({name, description, dueDate, prio});
+    ProjectController.getCurrent().addTask(newTask);
+
+    // Renders task
+    renderTask(newTask);
+  });
 }
 
-export { renderPageLayout }
+export { loadModals }
