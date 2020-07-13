@@ -79,26 +79,23 @@ function insertProjectsInSideBar(){
         collection.appendChild(li);
 
         break
-      } else if(tasks[i].done) {
-        continue
-      } else {
+      } 
+      else {
         let taskElementId = `proj${ proj.id }-task${ tasks[i].id }`;
+        let isTaskDone = tasks[i].done ? 'checked="checked"' : '';
         let itemHTML = `
           <div>
             <label>
-              <input id="sidebar-${ taskElementId }" type="checkbox"/>
+              <input id="sidebar-${ taskElementId }" type="checkbox" ${ isTaskDone }/>
               <span>${ tasks[i].name }</span>
             </label>
-            <a href="#!" class="secondary-content">
-              <i class="material-icons">edit</i>
-            </a>
           </div>
         `;
         li.insertAdjacentHTML('beforeend', itemHTML);
         collection.appendChild(li);
 
         // Synchronize this task checkbox on sidebar and on mainContainer
-        let checkbox = collection.querySelector('#sidebar-'+taskElementId);
+        let checkbox = collection.querySelector(`#sidebar-${ taskElementId }`);
         checkbox.addEventListener('change', () => {
           tasks[i].done = checkbox.checked;
 

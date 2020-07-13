@@ -12,7 +12,14 @@ const Project = (projName, projDescription) => {
   }
   function getAllTasks(){ return tasks }
 
-  return { name, description, id, addTask, getAllTasks }
+  function editTask(task) {
+    let index = tasks.findIndex(t => t.id == task.id);
+    task.done = tasks[index].done;
+
+    tasks.splice(index, 1, task);    
+  }
+
+  return { name, description, id, addTask, editTask, getAllTasks }
 }
 
 const Task = (arg) => {
@@ -21,8 +28,8 @@ const Task = (arg) => {
     description: arg.description || 'No description provided',
     dueDate: arg.dueDate || 'Not set',
     prio: arg.prio || 0,
-    done: arg.done || false,
-    id: undefined,
+    done: arg.done,
+    id: arg.id || undefined,
   };
 
   return task

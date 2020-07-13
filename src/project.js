@@ -106,7 +106,7 @@ function renderTask(task){
               <a href="#!" class="secondary-content">
                 <i class="material-icons">delete</i>
               </a>
-              <a href="#!" class="secondary-content">
+              <a id="edit-${ taskElemId }" class="secondary-content modal-trigger" href="#modal-editTask">
                 <i class="material-icons">edit</i>
               </a>
             </div>
@@ -119,11 +119,25 @@ function renderTask(task){
     taskList.insertAdjacentHTML("beforeend", taskHTML);
 
 
+    // Event listener on edit button to fill out the modal with current information
+    let editBtn = taskList.querySelector(`#edit-${ taskElemId }`);
+    editBtn.addEventListener('click', () => {
+      document.querySelector('input#edit_task_name').value = task.name;
+      document.querySelector('input#edit_task_description').value = task.description;
+      document.querySelector('input#edit_task_dueDate').value = task.dueDate;
+      document.querySelector('select#edit_task_priority').M_FormSelect.input.value = task.prio;
+
+      document.querySelector('p#edit_task_id').textContent = task.id;
+
+      M.updateTextFields();
+    });
+
     
     // Synchronize this task checkbox on sidebar and on mainContainer
     let checkbox = taskList.querySelector(`#main-${ taskElemId }`);
     checkbox.addEventListener('change', ()=>{
       task.done = checkbox.checked;
+      ProjectController.getCurrent().editTask(task); // This step is necessary as the task reference in this function is passed as an argument, not the actual element in the ProjectController
 
       let taskOnSidebar = document.querySelector(`#sidebar-${ taskElemId }`);
       if(taskOnSidebar){ taskOnSidebar.checked = checkbox.checked };

@@ -19,6 +19,7 @@ example.addTask({
   description: 'Duis sodales est nec hendrerit ultricies.',
   dueDate: '25 / Jul / 20',
   prio: 'High Priority',
+  done: false,
 });
 
 example.addTask({
@@ -26,6 +27,7 @@ example.addTask({
   description: 'Morbi rhoncus erat tellus, ut vehicula erat pretium vel.',
   dueDate: '04 / Aug / 20',
   prio: 'Medium Priority',
+  done: false,
 });
 
 example.addTask({
@@ -33,6 +35,7 @@ example.addTask({
   description: 'Vivamus eu ante nec massa dictum blandit id ut mauris.',
   dueDate: '12 / Dec / 20',
   prio: 'Low Priority',
+  done: false,
 });
 
 ProjectController.add(example);

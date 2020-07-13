@@ -7,6 +7,7 @@ import { updateSidebar } from './sidebar';
 function loadModals() {
   loadNewProjectModal();
   loadNewTaskModal();
+  loadEditTaskModal();
 
 
   // - Materialize-CSS Components Loaders
@@ -161,5 +162,82 @@ function loadNewTaskModal() {
     updateSidebar();
   });
 }
+
+function loadEditTaskModal() {
+  const todoApp = document.querySelector('#todoApp');
+
+
+  const modalHTML = `
+    <!-- Modal Structure -->
+    <div id="modal-editTask" class="modal modal-fixed-footer" style="max-height: 400px;" >
+      <div class="modal-content">
+        <h4>Edit task</h4>
+        <div class="row">
+          <div class="input-field col s8">
+            <i class="material-icons prefix">check_circle</i>
+            <input id="edit_task_name" type="text" class="validate">
+            <label for="edit_task_name">Task name</label>
+          </div>
+          
+          <div class="input-field col s4">
+            <select id="edit_task_priority">
+              <option value="" disabled selected>Not set</option>
+              <option value="1">Urgent</option>
+              <option value="2">High Priority</option>
+              <option value="3">Medium Priority</option>
+              <option value="4">Low Priority</option>
+            </select>
+            <label>Priority Level</label>
+          </div> 
+        </div>
+
+        <div class="row">
+          <div class="input-field col s8">
+            <i class="material-icons prefix">info</i>
+            <input id="edit_task_description" type="text" class="validate">
+            <label for="edit_task_description">Description</label>
+          </div>   
+          
+          <div class="input-field col s4">
+            <i class="material-icons prefix">date_range</i>
+            <input id="edit_task_dueDate" type="text" class="datepicker">
+            <label for="edit_task_dueDate">Due Date</label>
+          </div>
+        </div>
+
+        <p id="edit_task_id" style="display:none"></p>
+      </div>
+
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+        <a id="btn-editTaskConfirm" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
+      </div>
+    </div>
+  `;
+
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
+
+
+  // Event Listener
+  document.querySelector('#btn-editTaskConfirm').addEventListener('click', () => {
+    // Creates new task in current project
+    const name = document.querySelector('input#edit_task_name').value;
+    const description = document.querySelector('input#edit_task_description').value;
+    const dueDate = document.querySelector('input#edit_task_dueDate').value;
+    const prio = document.querySelector('select#edit_task_priority').M_FormSelect.input.value;
+    const id = document.querySelector('p#edit_task_id').textContent;
+
+
+    let editedTask = Task({name, description, dueDate, prio, id});
+    ProjectController.getCurrent().editTask(editedTask);
+
+    // Renders project
+    renderProject();
+
+    // Updates sidebar
+    updateSidebar();
+  });
+}
+
 
 export { loadModals }
