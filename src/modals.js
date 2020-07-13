@@ -80,7 +80,7 @@ function loadNewProjectModal() {
     const name = document.querySelector('input#project_name').value;
     const description = document.querySelector('input#project_description').value;
   
-    let newProject = Project(name, description);
+    let newProject = Project({name, description});
     ProjectController.add(newProject);
   
   

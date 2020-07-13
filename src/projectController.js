@@ -1,7 +1,7 @@
 // - Factory Functions
-const Project = (projName, projDescription) => {
-  let name = projName;
-  let description = projDescription;
+const Project = arg => {
+  let name = arg.name;
+  let description = arg.description || 'No description provided';
   let tasks = [];
   let id;
   let taskIdCounter = 0;
@@ -67,11 +67,13 @@ const ProjectController = (() => {
     }
   }
 
+
   function remove(id){
     let index = projectsArr.findIndex(p => p.id == id);
 
     projectsArr.splice(index, 1);
   }
+
 
   function setCurrent(proj){ currentProject = proj; }
   function getCurrent(){ return currentProject }
