@@ -17,9 +17,11 @@ function renderSidebar() {
     <div class="sidebar-projects">
     </div>
 
-    <a id="btn-newProject" class="waves-effect waves-light btn-small red accent-2 modal-trigger" href="#modal1">
-      <i class="material-icons left">add</i>New project
-    </a>
+    <div class="center">
+      <a id="btn-newProject" class="center-align waves-effect waves-light btn-small red accent-2 modal-trigger" href="#modal1">
+        <i class="material-icons left">add</i>New project
+      </a>
+    </div
   `;
 
   sidebar.insertAdjacentHTML("beforeend", sidebarHTML);

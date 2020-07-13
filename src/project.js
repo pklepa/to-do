@@ -30,10 +30,8 @@ function renderProject() {
       ${ project.description }
     </blockquote>
 
-    <ul class="collapsible">
-    </ul>
 
-    <div class="center-align">
+    <div id="btn-newTask" class="center-align">
       <a class="waves-effect waves-light btn-large red accent-2 modal-trigger" href="#modal2"><i class="material-icons left">add</i>Add Task</a>
     </div>    
   `;
@@ -66,12 +64,26 @@ function renderProject() {
   });
 
 
+  // If there are no tasks, add the no-tasks image
+  if(project.getAllTasks() == false){
+    const referenceElem = document.querySelector('#btn-newTask');
+    const imgHTML = `<div class="row center no-tasks-img"><img src="../assets/taken.svg" alt="No tasks added"></div>`;
+    const msgHTML = `<h6 class="center" style="margin-bottom: 25px; color: #ff5252;">wooo. no tasks found here</h6>`;
+    referenceElem.insertAdjacentHTML('beforebegin', imgHTML);
+    referenceElem.insertAdjacentHTML('beforebegin', msgHTML);
 
 
-  // Renders all existent tasks in the current project
-  project.getAllTasks().forEach( task => {
-    renderTask(task);
-  });
+
+  } else {
+    const referenceElem = document.querySelector('#btn-newTask');
+    const collapsibleHTML = `<ul class="collapsible"></ul>`;
+    referenceElem.insertAdjacentHTML('beforebegin', collapsibleHTML);
+
+    // Renders all existent tasks in the current project
+    project.getAllTasks().forEach( task => {
+      renderTask(task);
+    });
+  }
 
 
   // - Materialize-CSS Components Loaders
@@ -81,6 +93,7 @@ function renderProject() {
 
 function renderTask(task){
     const taskList = document.querySelector('.mainContent ul.collapsible');
+    if(!taskList){ renderProject() } // If this is the first task, render project in order to remove the no-tasks image
 
     let isTaskDone = task.done ? 'checked="checked"' : '';
     let taskElemId = `proj${ ProjectController.getCurrent().id }-task${ task.id }`;

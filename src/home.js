@@ -6,10 +6,10 @@ function renderHome() {
   if(main.children.length > 0){ main.textContent = ""; }
 
   const contentHTML = `
-    <div class="mainContent">
+    <div class="mainContent center">
       <!-- Breadcrumb -->
       <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper left">
           <div class="col s12">
             <a href="#!" class="breadcrumb">home</a>
           </div>
@@ -17,21 +17,25 @@ function renderHome() {
       </nav>
 
       <!-- Content -->
-      <blockquote>
+      <blockquote class="left-align">
         "You've got shit to do and shit has got to be done." - <em>Someone, Somewhere.</em>
       </blockquote>
 
       <h4>welcome!</h4>
-      <p>This app in intended to help you get your shit together and do it.</p>
+      <p>This app in intended to help you get your shit together and do it. <em style="color: #ff5252; margin-left: 10px;" class="material-icons">done</em></p>
       <p>Try adding some projects and split your large shit (known as projects) into smaller, managable, little shitties (or tasks).</p>
 
-      <ul style="max-width: 800px;" class="collection with-header">
-        <li class="collection-header"><h4>your projects</h4></li>
-      </ul>
+      <div class="center-align center">
+        <ul class="collection with-header center-align">
+          <li class="collection-header"><h4>your projects</h4></li>
+        </ul>
+      </div>
 
-      <a id="btn-newProject" class="waves-effect waves-light btn-small red accent-2 modal-trigger" href="#modal1">
-        <i class="material-icons left">add</i>New project
-      </a>
+      <div class="center">
+        <a id="btn-newProject" class="waves-effect waves-light btn-large red accent-2 modal-trigger" href="#modal1">
+          <i class="material-icons left">add</i>New project
+        </a>
+      </div>
     </div>
   `;
 

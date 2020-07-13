@@ -15,6 +15,7 @@
 #sideContainer {
     padding: 0 20px;
     border-right: 10px solid var(--normal);
+    min-height: 90%;
 }
 
 #sideContainer .title {
@@ -90,4 +91,13 @@ a.secondary-content + a.secondary-content { margin-right: 10px; }
 
 .modal.datepicker-modal .modal-content.datepicker-container {
     height: 100%;
+}
+
+.no-tasks-img img{
+    width: 500px;
+}
+
+
+.sidenav {
+    color: var(--red-accent-2);
 }

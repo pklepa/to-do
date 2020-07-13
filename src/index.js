@@ -54,28 +54,20 @@ DisplayController.render();
 /*
   Things to think about:
 
-  - Where to handle project deletions?
-  - What about task deletions?
   - Should sidebar and main container be rendered together (in project creation)?
 
 
   TO-DO:
 
-  - Add project to sidebar when created
-  - Project edit/delete
   - Completed tasks: stylize text (color or riscado)
-  - Navigation to and from different projects via anchor tags in sidebar and homepage
   - Fix mobile view (remove sidebar, add hamburguer menu on navbar?)
+  - Local storage or firebase
+  - About/contact page
 
 
   Extras:
 
-  - Mostrar na sidebar somente tasks por fazer
-  - Incluir tooltips em diversos lugares
-  - Fazer about/contact page
-  - Local storage ou Firebase
   - Se escolher firebase, fazer pagina/modal de login?
   - Incluir footer?
-  - Realocar Materialize-CSS Components Loaders pra fora de index.js
 
 */
