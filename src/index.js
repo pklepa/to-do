@@ -11,7 +11,7 @@ example.addTask({
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   dueDate: '06 / Jul / 20',
   prio: 'Urgent',
-  done: true,
+  done: false,
 });
 
 example.addTask({
@@ -44,12 +44,7 @@ DisplayController.render();
 
 
 
-// - Materialize-CSS Components Loaders
-document.addEventListener('DOMContentLoaded', function () {
-  const tooltipped = document.querySelectorAll('.tooltipped');
 
-  M.Tooltip.init(tooltipped);
-});
 
 
 
@@ -58,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   - Where to handle project deletions?
   - What about task deletions?
-  - Should tasks have ids? Where to create them?
   - Should sidebar and main container be rendered together (in project creation)?
 
 
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   - Add project to sidebar when created
   - Project edit/delete
-  - Completed tasks: syncronize project and sidebar
   - Completed tasks: stylize text (color or riscado)
   - Navigation to and from different projects via anchor tags in sidebar and homepage
   - Fix mobile view (remove sidebar, add hamburguer menu on navbar?)

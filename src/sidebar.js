@@ -53,12 +53,15 @@ function insertProjectsInSideBar(){
     collection.appendChild(collectionHeader);
 
 
+    // Adds only the first 3 incomplete tasks
+    let j = 0;
     const tasks = proj.getAllTasks();
     for (let i = 0; i < tasks.length; i++) {
+
       let li = document.createElement('li');
       li.classList.add('collection-item');
 
-      if(i == 3){
+      if(j == 3){
         let div = document.createElement('div');
         div.classList.add('center-align');
 
@@ -76,23 +79,35 @@ function insertProjectsInSideBar(){
         collection.appendChild(li);
 
         break
+      } else if(tasks[i].done) {
+        continue
+      } else {
+        let taskElementId = `proj${ proj.id }-task${ tasks[i].id }`;
+        let itemHTML = `
+          <div>
+            <label>
+              <input id="sidebar-${ taskElementId }" type="checkbox"/>
+              <span>${ tasks[i].name }</span>
+            </label>
+            <a href="#!" class="secondary-content">
+              <i class="material-icons">edit</i>
+            </a>
+          </div>
+        `;
+        li.insertAdjacentHTML('beforeend', itemHTML);
+        collection.appendChild(li);
+
+        // Synchronize this task checkbox on sidebar and on mainContainer
+        let checkbox = collection.querySelector('#sidebar-'+taskElementId);
+        checkbox.addEventListener('change', () => {
+          tasks[i].done = checkbox.checked;
+
+          let taskOnMainView = document.querySelector(`#main-${ taskElementId }`);
+          if(taskOnMainView){ taskOnMainView.checked = checkbox.checked; }
+        });
+
+        j++;
       }
-
-
-      let isTaskDone = tasks[i].done ? 'checked="checked"' : '';
-      let itemHTML = `
-        <div>
-          <label>
-            <input type="checkbox" ${ isTaskDone }/>
-            <span>${ tasks[i].name }</span>
-          </label>
-          <a href="#!" class="secondary-content">
-            <i class="material-icons">edit</i>
-          </a>
-        </div>
-      `;
-      li.insertAdjacentHTML('beforeend', itemHTML);
-      collection.appendChild(li);
     }
 
 

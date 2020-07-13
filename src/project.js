@@ -18,7 +18,7 @@ function renderProject() {
         <div class="col s12">
           <a href="#!" class="breadcrumb btn-goHome">home</a>
           <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
-          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">edit</i></a>
+          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Edit this project"><i class="material-icons">edit</i></a>
           <a href="#!" class="breadcrumb">#${ project.name }</a>
         </div>
       </div>
@@ -55,14 +55,16 @@ function renderProject() {
 
   // - Materialize-CSS Components Loaders
   const collapsibles = document.querySelectorAll('.collapsible');
+  const tooltipped = document.querySelectorAll('.tooltipped');
   M.Collapsible.init(collapsibles);
-  
+  M.Tooltip.init(tooltipped);  
 }
 
 function renderTask(task){
     const taskList = document.querySelector('.mainContent ul.collapsible');
 
     let isTaskDone = task.done ? 'checked="checked"' : '';
+    let taskElemId = `proj${ ProjectController.getCurrent().id }-task${ task.id }`;
 
     // If task priority is not set, don't add a badge. If it is, decide what color and what text.
     let badge;
@@ -88,7 +90,7 @@ function renderTask(task){
       <li>
         <div class="collapsible-header">
           <label>
-            <input type="checkbox" ${ isTaskDone }/>
+            <input id="main-${ taskElemId }" type="checkbox" ${ isTaskDone }/>
             <span>${ task.name }</span>
           </label>
           ${ badge }
@@ -115,6 +117,17 @@ function renderTask(task){
 
 
     taskList.insertAdjacentHTML("beforeend", taskHTML);
+
+
+    
+    // Synchronize this task checkbox on sidebar and on mainContainer
+    let checkbox = taskList.querySelector(`#main-${ taskElemId }`);
+    checkbox.addEventListener('change', ()=>{
+      task.done = checkbox.checked;
+
+      let taskOnSidebar = document.querySelector(`#sidebar-${ taskElemId }`);
+      if(taskOnSidebar){ taskOnSidebar.checked = checkbox.checked };
+    });
 }
 
 

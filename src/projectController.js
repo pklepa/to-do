@@ -4,10 +4,12 @@ const Project = (projName, projDescription) => {
   let description = projDescription;
   let tasks = [];
   let id;
+  let taskIdCounter = 0;
 
-  let taskIdCounter;
-
-  function addTask(task){ tasks.push(task) }
+  function addTask(task){ 
+    task.id = ++taskIdCounter;
+    tasks.push(task);
+  }
   function getAllTasks(){ return tasks }
 
   return { name, description, id, addTask, getAllTasks }
@@ -20,6 +22,7 @@ const Task = (arg) => {
     dueDate: arg.dueDate || 'Not set',
     prio: arg.prio || 0,
     done: arg.done || false,
+    id: undefined,
   };
 
   return task
