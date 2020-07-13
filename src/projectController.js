@@ -10,17 +10,27 @@ const Project = (projName, projDescription) => {
     task.id = ++taskIdCounter;
     tasks.push(task);
   }
-  function getAllTasks(){ return tasks }
 
-  function editTask(task) {
-    let index = tasks.findIndex(t => t.id == task.id);
-    task.done = tasks[index].done;
+  function editTask(changes) {
+    let index = tasks.findIndex(t => t.id == changes.id);
 
-    tasks.splice(index, 1, task);    
+    for (const key in changes) {
+      tasks[index][key] = changes[key];
+    }  
+  }
+  
+  function deleteTask(taskId) {
+    let index = tasks.findIndex(t => t.id == taskId);
+
+    tasks.splice(index, 1);
   }
 
-  return { name, description, id, addTask, editTask, getAllTasks }
+  function getAllTasks(){ return tasks }
+
+  return { name, description, id, addTask, editTask, deleteTask, getAllTasks }
 }
+
+
 
 const Task = (arg) => {
   let task = {
@@ -36,6 +46,7 @@ const Task = (arg) => {
 }
 
 
+
 const ProjectController = (() => {
   let projectsArr = [];
   let projIdCounter = 0;
@@ -48,11 +59,25 @@ const ProjectController = (() => {
     currentProject = project;
   }
 
+  function edit(changes){
+    let index = projectsArr.findIndex(p => p.id == changes.id);
+
+    for (const key in changes) {
+      projectsArr[index][key] = changes[key];
+    }
+  }
+
+  function remove(id){
+    let index = projectsArr.findIndex(p => p.id == id);
+
+    projectsArr.splice(index, 1);
+  }
+
   function setCurrent(proj){ currentProject = proj; }
   function getCurrent(){ return currentProject }
   function getAll(){ return projectsArr }
 
-  return { add, setCurrent, getCurrent, getAll }
+  return { add, edit, remove, setCurrent, getCurrent, getAll }
 })();
 
 

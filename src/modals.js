@@ -1,6 +1,7 @@
 import { ProjectController, Project, Task } from './projectController';
 import { renderProject, renderTask } from './project';
 import { updateSidebar } from './sidebar';
+import { renderHome } from './home';
 
 
 
@@ -8,6 +9,8 @@ function loadModals() {
   loadNewProjectModal();
   loadNewTaskModal();
   loadEditTaskModal();
+  loadEditProjectModal();
+  loadDeleteProjectModal();
 
 
   // - Materialize-CSS Components Loaders
@@ -82,13 +85,98 @@ function loadNewProjectModal() {
   
   
     // Renders project page
-    renderProject(newProject);
+    renderProject();
 
     // Updates sidebar
     updateSidebar();
   });
 }
 
+function loadEditProjectModal() {
+  const todoApp = document.querySelector('#todoApp');
+
+  const modalHTML = `
+      <!-- Modal Structure -->
+      <div id="modal-editProject" class="modal modal-fixed-footer" style="max-height: 300px;">
+        <div class="modal-content">
+          <h4>Edit project</h4>
+          <p>Give your project a name and a brief description.</p>
+          <div class="row">
+            <div class="input-field col s4">
+              <input id="edit_project_name" type="text" class="validate">
+              <label for="edit_project_name">Project name</label>
+            </div>
+
+            <div class="input-field col s8">
+              <input id="edit_project_description" type="text" class="validate">
+              <label for="edit_project_description">Description</label>
+            </div>
+          </div>
+
+          <p id="edit_project_id" style="display:none"></p>
+
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+          <a id="btn-editProjectConfirm" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
+        </div>
+      </div>  
+  `;
+
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
+
+
+  // Event Listener
+  document.querySelector('#btn-editProjectConfirm').addEventListener('click', () => {
+    const name = document.querySelector('input#edit_project_name').value;
+    const description = document.querySelector('input#edit_project_description').value;
+    const id = document.querySelector('p#edit_project_id').textContent;
+  
+    ProjectController.edit({name, description, id});
+  
+    // Renders project page
+    renderProject();
+
+    // Updates sidebar
+    updateSidebar();
+  });
+}
+
+function loadDeleteProjectModal() {
+  const todoApp = document.querySelector('#todoApp');
+
+  const modalHTML = `
+      <!-- Modal Structure -->
+      <div id="modal-deleteProject" class="modal modal-fixed-footer" style="max-height: 250px;">
+        <div class="modal-content">
+          <h4>Delete project</h4>
+          <p>If you delete this project, every task inside it will be lost as well. Do you wish to continue?</p>
+
+          <p id="delete_project_id" style="display:none"></p>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+          <a id="btn-deleteProjectConfirm" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
+        </div>
+      </div>  
+  `;
+
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
+
+
+  // Event Listener
+  document.querySelector('#btn-deleteProjectConfirm').addEventListener('click', () => {
+    const id = document.querySelector('p#delete_project_id').textContent;
+  
+    ProjectController.remove(id);
+  
+    // Renders home page
+    renderHome();
+
+    // Updates sidebar
+    updateSidebar();
+  });
+}
 
 function loadNewTaskModal() {
   const todoApp = document.querySelector('#todoApp');
@@ -227,9 +315,7 @@ function loadEditTaskModal() {
     const prio = document.querySelector('select#edit_task_priority').M_FormSelect.input.value;
     const id = document.querySelector('p#edit_task_id').textContent;
 
-
-    let editedTask = Task({name, description, dueDate, prio, id});
-    ProjectController.getCurrent().editTask(editedTask);
+    ProjectController.getCurrent().editTask({name, description, dueDate, prio, id});
 
     // Renders project
     renderProject();

@@ -1,5 +1,6 @@
 import { renderHome } from "./home";
 import { ProjectController } from "./projectController";
+import { updateSidebar } from "./sidebar";
 
 
 function renderProject() {
@@ -16,10 +17,10 @@ function renderProject() {
     <nav>
       <div class="nav-wrapper">
         <div class="col s12">
-          <a href="#!" class="breadcrumb btn-goHome">home</a>
-          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Delete this project"><i class="material-icons">delete</i></a>
-          <a href="#!" class="secondary-content secondary-content-breadcrumb tooltipped" data-position="left" data-tooltip="Edit this project"><i class="material-icons">edit</i></a>
-          <a href="#!" class="breadcrumb">#${ project.name }</a>
+          <a href="#" class="breadcrumb btn-goHome">home</a>
+          <a id="delete-proj${ project.id }" href="#modal-deleteProject" class="secondary-content secondary-content-breadcrumb modal-trigger"><i class="material-icons">delete</i></a>
+          <a id="edit-proj${ project.id }" href="#modal-editProject" class="secondary-content secondary-content-breadcrumb modal-trigger"><i class="material-icons">edit</i></a>
+          <a href="#" class="breadcrumb">#${ project.name }</a>
         </div>
       </div>
     </nav>
@@ -46,6 +47,26 @@ function renderProject() {
   const homeBtn = document.querySelector('.breadcrumb.btn-goHome');
   homeBtn.addEventListener('click', renderHome);
 
+  // Event listener on Edit Project button
+  const editBtn = content.querySelector(`#edit-proj${ project.id }`);
+  editBtn.addEventListener('click', () => {
+    document.querySelector('input#edit_project_name').value = project.name;
+    document.querySelector('input#edit_project_description').value = project.description;
+    document.querySelector('p#edit_project_id').textContent = project.id;
+
+    M.updateTextFields();
+  });
+
+  // Event listener on Delete Project button
+  const deleteBtn = content.querySelector(`#delete-proj${ project.id }`);
+  deleteBtn.addEventListener('click', () => {
+    document.querySelector('p#delete_project_id').textContent = project.id;
+
+    M.updateTextFields();
+  });
+
+
+
 
   // Renders all existent tasks in the current project
   project.getAllTasks().forEach( task => {
@@ -55,9 +76,7 @@ function renderProject() {
 
   // - Materialize-CSS Components Loaders
   const collapsibles = document.querySelectorAll('.collapsible');
-  const tooltipped = document.querySelectorAll('.tooltipped');
   M.Collapsible.init(collapsibles);
-  M.Tooltip.init(tooltipped);  
 }
 
 function renderTask(task){
@@ -103,7 +122,7 @@ function renderTask(task){
             </div>
 
             <div class="icons">
-              <a href="#!" class="secondary-content">
+              <a id="delete-${ taskElemId }" href="#" class="secondary-content">
                 <i class="material-icons">delete</i>
               </a>
               <a id="edit-${ taskElemId }" class="secondary-content modal-trigger" href="#modal-editTask">
@@ -130,6 +149,15 @@ function renderTask(task){
       document.querySelector('p#edit_task_id').textContent = task.id;
 
       M.updateTextFields();
+    });
+
+    // Event listener on delete button
+    let deleteBtn = taskList.querySelector(`#delete-${ taskElemId }`);
+    deleteBtn.addEventListener('click', () => {
+      ProjectController.getCurrent().deleteTask(task.id);
+
+      renderProject();
+      updateSidebar();
     });
 
     

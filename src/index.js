@@ -11,7 +11,7 @@ example.addTask({
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   dueDate: '06 / Jul / 20',
   prio: 'Urgent',
-  done: false,
+  done: true,
 });
 
 example.addTask({
