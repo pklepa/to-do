@@ -11,6 +11,7 @@ function loadModals() {
   loadEditTaskModal();
   loadEditProjectModal();
   loadDeleteProjectModal();
+  loadAboutModal();
 
 
   // - Materialize-CSS Components Loaders
@@ -323,6 +324,36 @@ function loadEditTaskModal() {
     // Updates sidebar
     updateSidebar();
   });
+}
+
+function loadAboutModal() {
+  const todoApp = document.querySelector('#todoApp');
+
+  const modalHTML = `
+      <!-- Modal Structure -->
+      <div id="modal-about" class="modal">
+        <div class="modal-content">
+          <h4>About</h4>
+          <h5>What is it?</h5>
+          <p><strong>sh*t-to-do</strong> is to-do list web app that allows you to organize your shit by creating projects and assigning tasks to get whatever it is that you have to do done.</p>
+
+          <h5>How?</h5>
+          <p><strong>sh*t-to-do</strong> makes use of <a href="https://materializecss.com/">Materialize-CSS</a> to give a simple but pleasant visuals for the user. Also, it uses your local browser storage to save your creations.</p>
+
+          <h5>Why?</h5>
+          <p>This project is mainly envisioned as a web development exercise, shipped as a solution for the to-do project in <a href="https://www.theodinproject.com/lessons/todo-list">The Odin Project</a>.</p>
+
+          <h5>By whom?</h5>
+          <p>Glad you asked! <strong>sh*t-to-do</strong> was made by Pedro Klepa, you can check more works like this or say hello on my <a href="https://github.com/pklepa">Github</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-red btn-flat">Close</a>
+        </div>
+      </div>  
+  `;
+
+  todoApp.insertAdjacentHTML('beforeend', modalHTML);
+
 }
 
 

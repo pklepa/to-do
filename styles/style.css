@@ -97,7 +97,10 @@ a.secondary-content + a.secondary-content { margin-right: 10px; }
     width: 500px;
 }
 
-
 .sidenav {
+    color: var(--red-accent-2);
+}
+
+.modal#modal-about strong {
     color: var(--red-accent-2);
 }

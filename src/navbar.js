@@ -1,3 +1,6 @@
+import { renderHome } from "./home";
+
+
 function renderNavbar() {
   const navbar = document.querySelector('#navbar');
 
@@ -8,13 +11,13 @@ function renderNavbar() {
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
-              <a href="#">Home</a>
+              <a class="btn-goHome" href="#">Home</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a class="modal-trigger" href="#modal-about">About</a>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <a href="https://github.com/pklepa">Other works</a>
             </li>
           </ul>
         </div>
@@ -22,9 +25,9 @@ function renderNavbar() {
 
       <ul class="sidenav" id="mobile-demo">
         <li><h5 class="center">sh*t-to-do</h5></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a class="btn-goHome" href="#">Home</a></li>
+        <li><a class="modal-trigger" href="#modal-about">About</a></li>
+        <li><a href="https://github.com/pklepa">Other works</a></li>
         <li><div class="divider"></div></li>
       </ul>
   `;
@@ -33,10 +36,15 @@ function renderNavbar() {
   navbar.insertAdjacentHTML("beforeend", navHTML);
 
   // Initialize Materialize-CSS components
-  document.addEventListener('DOMContentLoaded', function() {
-    var sidenav = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(sidenav);
+  const sidenav = document.querySelector('.sidenav');
+  M.Sidenav.init(sidenav);
+
+  // Event listener on navbar
+  const homeBtns = navbar.querySelectorAll('.btn-goHome');
+  homeBtns.forEach(btn => {
+    btn.addEventListener('click', () => { renderHome(); M.Sidenav.getInstance(sidenav).close() });
   });
+
 }
 
 export { renderNavbar }
