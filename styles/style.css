@@ -1,0 +1,106 @@
+:root {
+    --light: #f3e1e1;
+    --extra-light: #faf2f2;
+    --normal: #f1d1d1;
+    --dark: #7d5a5a;
+
+    --red-accent-2: #ff5252;
+
+}
+
+#pageLayout {
+    margin-top: 40px;
+}
+
+#sideContainer {
+    padding: 0 20px;
+    border-right: 10px solid var(--normal);
+    min-height: 90%;
+}
+
+#sideContainer .title {
+    color: var(--red-accent-2);
+}
+
+
+#sideContainer a#btn-newProject {
+    margin: 16px 0;
+}
+
+a.secondary-content { color: #e0e0e0; }
+a.secondary-content:hover { color: var(--red-accent-2); }
+a.secondary-content-breadcrumb:hover { color: white; }
+a.secondary-content + a.secondary-content { margin-right: 10px; }
+
+#sideContainer ul.collection {
+    border: none;
+}
+
+#sideContainer li.collection-header {
+    border: none;
+    padding: 10px 0 ;
+}
+
+#sideContainer li.collection-item {
+    padding: 0 0 8px;
+    margin: 8px 20px;
+}
+
+#sideContainer li.collection-item .view-more {
+    color: var(--red-accent-2);
+    font-size: 12px;
+}
+
+
+.collapsible-body .my-body-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collapsible-body .my-body-container .body-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.collapsible-body .my-body-container .body-content span {
+    display: flex;
+    align-items: center;
+}
+
+.collapsible-body .my-body-container .body-content span + span {
+    margin-top: 20px;
+}
+
+
+.collapsible-body .my-body-container .body-content span i {
+    margin-right: 5px;
+    color: var(--red-accent-2);
+}
+
+.modal.datepicker-modal {
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+    transform: scale(0.9) !important;
+    margin-top: -40px;
+}
+
+.modal.datepicker-modal .modal-content.datepicker-container {
+    height: 100%;
+}
+
+.no-tasks-img img{
+    width: 500px;
+}
+
+.sidenav {
+    color: var(--red-accent-2);
+}
+
+.modal#modal-about strong {
+    color: var(--red-accent-2);
+}
