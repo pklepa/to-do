@@ -9,9 +9,17 @@
 
 ### Screenshots
 
-#### Web
+#### Home
 
-#### Mobile
+![image](https://user-images.githubusercontent.com/22618438/91084670-ba792700-e622-11ea-910f-f6d254f15370.png)
+
+#### Project page
+
+![image](https://user-images.githubusercontent.com/22618438/91084912-0cba4800-e623-11ea-8b5f-53d37538de5f.png)
+
+#### New task
+
+![image](https://user-images.githubusercontent.com/22618438/91085004-2e1b3400-e623-11ea-81c5-c8e6cba91567.png)
 
 ## Objectives
 
