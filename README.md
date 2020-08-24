@@ -1,5 +1,4 @@
 # to-do-app
-[Odin] Simple To-Do list web application 
 
 ## Description
 
@@ -25,6 +24,8 @@
 
 The focus and objectives of this project are the following:
 
+- Write modular code with separation of concerns
+
 - Practice SOLID OOP principles, mainly Single Responsability Principle
 
 - Expand knowledge of the Javascript language in a larger scope project
@@ -34,6 +35,12 @@ The focus and objectives of this project are the following:
 - Design of simple, clean and beautiful landing page
 
 ## Development
+
+These are some tools used in this project.
+
+### Bundler
+
+- [Webpack](https://webpack.js.org/)
 
 ### Front-end Framework
 
